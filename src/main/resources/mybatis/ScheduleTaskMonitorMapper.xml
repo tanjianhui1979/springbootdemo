@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.springbootdemo.dao.ScheduleTaskMonitorMapper" >
+  <resultMap id="BaseResultMap" type="com.springbootdemo.model.ScheduleTaskMonitor" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="schedule_task_id" property="scheduleTaskId" jdbcType="INTEGER" />
+    <result column="job_start_time" property="jobStartTime" jdbcType="TIMESTAMP" />
+    <result column="job_end_time" property="jobEndTime" jdbcType="TIMESTAMP" />
+    <result column="job_anticipate_end_time" property="jobAnticipateEndTime" jdbcType="TIMESTAMP" />
+    <result column="job_max_anticipate_end_time" property="jobMaxAnticipateEndTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="last_update_by" property="lastUpdateBy" jdbcType="VARCHAR" />
+    <result column="last_update_time" property="lastUpdateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.springbootdemo.model.ScheduleTaskMonitor" extends="BaseResultMap" >
+    <result column="remark" property="remark" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, schedule_task_id, job_start_time, job_end_time, job_anticipate_end_time, job_max_anticipate_end_time, 
+    status, create_by, create_time, last_update_by, last_update_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    remark
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.springbootdemo.model.ScheduleTaskMonitorExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from stm_schedule_task_monitor
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.springbootdemo.model.ScheduleTaskMonitorExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from stm_schedule_task_monitor
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from stm_schedule_task_monitor
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from stm_schedule_task_monitor
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.springbootdemo.model.ScheduleTaskMonitorExample" >
+    delete from stm_schedule_task_monitor
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.springbootdemo.model.ScheduleTaskMonitor" >
+    insert into stm_schedule_task_monitor (id, schedule_task_id, job_start_time, 
+      job_end_time, job_anticipate_end_time, job_max_anticipate_end_time, 
+      status, create_by, create_time, 
+      last_update_by, last_update_time, remark
+      )
+    values (#{id,jdbcType=INTEGER}, #{scheduleTaskId,jdbcType=INTEGER}, #{jobStartTime,jdbcType=TIMESTAMP}, 
+      #{jobEndTime,jdbcType=TIMESTAMP}, #{jobAnticipateEndTime,jdbcType=TIMESTAMP}, #{jobMaxAnticipateEndTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{lastUpdateBy,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.springbootdemo.model.ScheduleTaskMonitor" >
+    insert into stm_schedule_task_monitor
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="scheduleTaskId != null" >
+        schedule_task_id,
+      </if>
+      <if test="jobStartTime != null" >
+        job_start_time,
+      </if>
+      <if test="jobEndTime != null" >
+        job_end_time,
+      </if>
+      <if test="jobAnticipateEndTime != null" >
+        job_anticipate_end_time,
+      </if>
+      <if test="jobMaxAnticipateEndTime != null" >
+        job_max_anticipate_end_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="lastUpdateBy != null" >
+        last_update_by,
+      </if>
+      <if test="lastUpdateTime != null" >
+        last_update_time,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="scheduleTaskId != null" >
+        #{scheduleTaskId,jdbcType=INTEGER},
+      </if>
+      <if test="jobStartTime != null" >
+        #{jobStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jobEndTime != null" >
+        #{jobEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jobAnticipateEndTime != null" >
+        #{jobAnticipateEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jobMaxAnticipateEndTime != null" >
+        #{jobMaxAnticipateEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateBy != null" >
+        #{lastUpdateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateTime != null" >
+        #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.springbootdemo.model.ScheduleTaskMonitorExample" resultType="java.lang.Integer" >
+    select count(*) from stm_schedule_task_monitor
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update stm_schedule_task_monitor
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.scheduleTaskId != null" >
+        schedule_task_id = #{record.scheduleTaskId,jdbcType=INTEGER},
+      </if>
+      <if test="record.jobStartTime != null" >
+        job_start_time = #{record.jobStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.jobEndTime != null" >
+        job_end_time = #{record.jobEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.jobAnticipateEndTime != null" >
+        job_anticipate_end_time = #{record.jobAnticipateEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.jobMaxAnticipateEndTime != null" >
+        job_max_anticipate_end_time = #{record.jobMaxAnticipateEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createBy != null" >
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdateBy != null" >
+        last_update_by = #{record.lastUpdateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastUpdateTime != null" >
+        last_update_time = #{record.lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update stm_schedule_task_monitor
+    set id = #{record.id,jdbcType=INTEGER},
+      schedule_task_id = #{record.scheduleTaskId,jdbcType=INTEGER},
+      job_start_time = #{record.jobStartTime,jdbcType=TIMESTAMP},
+      job_end_time = #{record.jobEndTime,jdbcType=TIMESTAMP},
+      job_anticipate_end_time = #{record.jobAnticipateEndTime,jdbcType=TIMESTAMP},
+      job_max_anticipate_end_time = #{record.jobMaxAnticipateEndTime,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=VARCHAR},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      last_update_by = #{record.lastUpdateBy,jdbcType=VARCHAR},
+      last_update_time = #{record.lastUpdateTime,jdbcType=TIMESTAMP},
+      remark = #{record.remark,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update stm_schedule_task_monitor
+    set id = #{record.id,jdbcType=INTEGER},
+      schedule_task_id = #{record.scheduleTaskId,jdbcType=INTEGER},
+      job_start_time = #{record.jobStartTime,jdbcType=TIMESTAMP},
+      job_end_time = #{record.jobEndTime,jdbcType=TIMESTAMP},
+      job_anticipate_end_time = #{record.jobAnticipateEndTime,jdbcType=TIMESTAMP},
+      job_max_anticipate_end_time = #{record.jobMaxAnticipateEndTime,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=VARCHAR},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      last_update_by = #{record.lastUpdateBy,jdbcType=VARCHAR},
+      last_update_time = #{record.lastUpdateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.springbootdemo.model.ScheduleTaskMonitor" >
+    update stm_schedule_task_monitor
+    <set >
+      <if test="scheduleTaskId != null" >
+        schedule_task_id = #{scheduleTaskId,jdbcType=INTEGER},
+      </if>
+      <if test="jobStartTime != null" >
+        job_start_time = #{jobStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jobEndTime != null" >
+        job_end_time = #{jobEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jobAnticipateEndTime != null" >
+        job_anticipate_end_time = #{jobAnticipateEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jobMaxAnticipateEndTime != null" >
+        job_max_anticipate_end_time = #{jobMaxAnticipateEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateBy != null" >
+        last_update_by = #{lastUpdateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateTime != null" >
+        last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.springbootdemo.model.ScheduleTaskMonitor" >
+    update stm_schedule_task_monitor
+    set schedule_task_id = #{scheduleTaskId,jdbcType=INTEGER},
+      job_start_time = #{jobStartTime,jdbcType=TIMESTAMP},
+      job_end_time = #{jobEndTime,jdbcType=TIMESTAMP},
+      job_anticipate_end_time = #{jobAnticipateEndTime,jdbcType=TIMESTAMP},
+      job_max_anticipate_end_time = #{jobMaxAnticipateEndTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      last_update_by = #{lastUpdateBy,jdbcType=VARCHAR},
+      last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.springbootdemo.model.ScheduleTaskMonitor" >
+    update stm_schedule_task_monitor
+    set schedule_task_id = #{scheduleTaskId,jdbcType=INTEGER},
+      job_start_time = #{jobStartTime,jdbcType=TIMESTAMP},
+      job_end_time = #{jobEndTime,jdbcType=TIMESTAMP},
+      job_anticipate_end_time = #{jobAnticipateEndTime,jdbcType=TIMESTAMP},
+      job_max_anticipate_end_time = #{jobMaxAnticipateEndTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      last_update_by = #{lastUpdateBy,jdbcType=VARCHAR},
+      last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

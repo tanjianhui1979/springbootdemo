@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit-1.6.xsd"
+	default-lazy-init="false">
+
+	<rabbit:connection-factory id="connectionFactory" host="10.10.28.222" port="5672" username="leo" password="123456" />
+
+	<rabbit:template id="rabbitTemplate" connection-factory="connectionFactory"
+					 exchange="myExchange" routing-key="foo.bar"/>
+
+	<rabbit:admin connection-factory="connectionFactory" />
+
+	<rabbit:queue id="testQueue" name="test1" />
+
+	<rabbit:topic-exchange name="myExchange">
+		<rabbit:bindings>
+			<rabbit:binding queue="test1" pattern="foo.*" />
+		</rabbit:bindings>
+	</rabbit:topic-exchange>
+
+
+	<rabbit:listener-container connection-factory="connectionFactory">
+		<rabbit:listener ref="sampleConsumer" method="listen" queue-names="test1" />
+	</rabbit:listener-container>
+</beans>

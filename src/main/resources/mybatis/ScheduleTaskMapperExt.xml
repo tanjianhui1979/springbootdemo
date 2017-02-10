@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springbootdemo.dao.ScheduleTaskMapper">
+  <update id="updateStatusBatch" parameterType="java.util.List">
+    <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+      update sct_schedule_task
+      <set>
+        <if test="item.status != null">
+          status = #{item.status,jdbcType=VARCHAR},
+        </if>
+        <if test="item.lastUpdateBy != null">
+          last_update_by = #{item.lastUpdateBy,jdbcType=VARCHAR},
+        </if>
+        <if test="item.lastUpdateTime != null">
+          last_update_time = #{item.lastUpdateTime,jdbcType=TIMESTAMP},
+        </if>
+      </set>
+      where id = #{item.id,jdbcType=INTEGER}
+    </foreach>
+  </update>
+</mapper>
