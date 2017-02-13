@@ -1,8 +1,10 @@
 package com.springbootdemo.model;
 
+import com.springbootdemo.sdk.model.BaseModel;
+
 import java.util.Date;
 
-public class ScheduleTaskMonitor {
+public class ScheduleTaskMonitor extends BaseModel{
     private Integer id;
 
     private Integer scheduleTaskId;
