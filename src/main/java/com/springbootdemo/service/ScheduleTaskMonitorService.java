@@ -4,6 +4,7 @@ import com.springbootdemo.dao.ScheduleTaskMonitorMapper;
 import com.springbootdemo.model.ScheduleTaskMonitor;
 import com.springbootdemo.model.ScheduleTaskMonitorExample;
 import com.springbootdemo.sdk.service.BaseService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("scheduleTaskMonitorService")
 public class ScheduleTaskMonitorService extends BaseService<Integer, ScheduleTaskMonitor, ScheduleTaskMonitorExample,
         ScheduleTaskMonitorMapper> {
+    @Autowired
     private ScheduleTaskMonitorMapper scheduleTaskMonitorMapper;
 
     @Override
