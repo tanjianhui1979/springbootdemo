@@ -1,7 +1,6 @@
 package com.springbootdemo.schedule;
 
 import com.springbootdemo.sdk.schedule.JobDetailManager;
-import com.springbootdemo.service.SampleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
