@@ -11,5 +11,6 @@
     <mapper resource="mybatis/ScheduleTaskMapper.xml" />
     <mapper resource="mybatis/ScheduleTaskMapperExt.xml" />
     <mapper resource="mybatis/ScheduleTaskMonitorMapper.xml" />
+    <mapper resource="mybatis/ScheduleTaskMonitorMapperExt.xml" />
   </mappers>
 </configuration>
