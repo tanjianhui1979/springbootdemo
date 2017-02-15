@@ -8,13 +8,13 @@ import java.util.Map;
  * Created by tanjianhui on 2017/2/13.
  */
 public abstract class BaseModel implements Serializable{
-    private Map<String, Object> properties = new HashMap<>();
+    private Map<String, Serializable> properties = new HashMap<>();
 
-    public void setProperties(Map<String, Object> properties){
+    public void setProperties(Map<String, Serializable> properties){
         this.properties.putAll(properties);
     }
 
-    public void setProperty(String key, Object value){
+    public void setProperty(String key, Serializable value){
         this.properties.put(key, value);
     }
 
@@ -22,7 +22,7 @@ public abstract class BaseModel implements Serializable{
         return this.properties.get(key);
     }
 
-    public <T> T getProperty(String key, Class<T> clazz){
+    public <T extends Serializable> T getProperty(String key, Class<T> clazz){
         Object obj = this.properties.get(key);
         if(null == obj || !clazz.isInstance(obj)) return null;
         return (T)obj;
