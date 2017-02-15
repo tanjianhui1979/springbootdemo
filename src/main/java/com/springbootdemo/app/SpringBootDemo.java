@@ -18,6 +18,6 @@ public class SpringBootDemo implements EmbeddedServletContainerCustomizer {
 
     @Override
     public void customize(ConfigurableEmbeddedServletContainer container) {
-        container.setPort(Integer.parseInt(System.getProperty("http.port")));
+//        container.setPort(Integer.parseInt(System.getProperty("http.port")));
     }
 }
