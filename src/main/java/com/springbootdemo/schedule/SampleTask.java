@@ -28,7 +28,7 @@ public class SampleTask {
 
     public void execute(){
 
-        logger.info("Executing...");
+        logger.info("调度开始...");
 
         // 新增监控记录
         ScheduleTaskMonitor scheduleTaskMonitor = new ScheduleTaskMonitor();
@@ -43,31 +43,30 @@ public class SampleTask {
         try {
             scheduleTaskMonitorService.addRequestNew(scheduleTaskMonitor);
         }catch (Exception e){
-            logger.error("Fail to add 'ScheduleTaskMonitor' record.", e);
+            logger.error("插入监控记录失败...", e);
             return ;
         }
 
         // 发送消息
         try {
-            logger.info("sending ...");
+            logger.info("消息发送中...");
             sampleProducer.send(scheduleTaskMonitor);
-            logger.info("Sent ...");
+            logger.info("消息发送成功...");
         }catch (Exception e){
-            logger.error("Sending excepton...", e);
+            logger.error("消息发送异常...", e);
 
             scheduleTaskMonitor.setStatus("9");
 
             try(StringWriter stringWriter = new StringWriter();
                 PrintWriter printWriter = new PrintWriter(stringWriter)) {
                 e.printStackTrace(printWriter);
-                scheduleTaskMonitor.setRemark("发布消息异常。\n" + stringWriter.toString());
+                scheduleTaskMonitor.setRemark("消息发送异常。\n" + stringWriter.toString());
             }catch(IOException ioe){
-                scheduleTaskMonitor.setRemark("发布消息异常。详情请查看日志文件。");
+                scheduleTaskMonitor.setRemark("消息发送异常。详情请查看日志文件。");
             }
 
             scheduleTaskMonitorService.updateRequestNew(scheduleTaskMonitor);
 
-            logger.info("Failing...");
             return ;
         }
 
@@ -75,6 +74,6 @@ public class SampleTask {
         scheduleTaskMonitor.setStatus("2");
         scheduleTaskMonitorService.updateRequestNew(scheduleTaskMonitor);
 
-        logger.info("Executed...");
+        logger.info("调度完成...");
     }
 }
