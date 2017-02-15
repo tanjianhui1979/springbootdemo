@@ -25,7 +25,7 @@ public class ScheduleTaskMonitorService extends BaseService<Integer, ScheduleTas
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public int addRequestNew(ScheduleTaskMonitor record){
-        return this.scheduleTaskMonitorMapper.insertSelective(record);
+        return this.scheduleTaskMonitorMapper.insertSelectiveUseGeneratedKeys(record);
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
