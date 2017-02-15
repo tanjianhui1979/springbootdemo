@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.springbootdemo.dao.ScheduleTaskMonitorMapper" >
+  <insert id="insertSelectiveUseGeneratedKeys" useGeneratedKeys="true" keyProperty="id"
+          parameterType="com.springbootdemo.model.ScheduleTaskMonitor">
+    insert into stm_schedule_task_monitor
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="scheduleTaskId != null" >
+        schedule_task_id,
+      </if>
+      <if test="jobStartTime != null" >
+        job_start_time,
+      </if>
+      <if test="jobEndTime != null" >
+        job_end_time,
+      </if>
+      <if test="jobAnticipateEndTime != null" >
+        job_anticipate_end_time,
+      </if>
+      <if test="jobMaxAnticipateEndTime != null" >
+        job_max_anticipate_end_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="lastUpdateBy != null" >
+        last_update_by,
+      </if>
+      <if test="lastUpdateTime != null" >
+        last_update_time,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="scheduleTaskId != null" >
+        #{scheduleTaskId,jdbcType=INTEGER},
+      </if>
+      <if test="jobStartTime != null" >
+        #{jobStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jobEndTime != null" >
+        #{jobEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jobAnticipateEndTime != null" >
+        #{jobAnticipateEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jobMaxAnticipateEndTime != null" >
+        #{jobMaxAnticipateEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateBy != null" >
+        #{lastUpdateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateTime != null" >
+        #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
