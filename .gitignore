@@ -12,7 +12,7 @@ target/
 .tern-project
 
 # intellij idea ignore
-.idea
+.idea/
 *.iml
 *.ipr
 *.iws
@@ -20,4 +20,9 @@ target/
 .gradle
 out/
 build/
+classes/
 nohup.out
+
+# other
+targetProject/
+tool/
