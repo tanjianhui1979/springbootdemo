@@ -40,32 +40,4 @@
 		<property name="targetMethod" value="execute" />
 		<property name="durable" value="true" />
 	</bean>
-    
-    <!-- 以下Job Service分别用来增加Job，暂停Job，重启Job -->
-    <!--<bean id="addJobService" class="com.i2f.i2shopping.scheduling.service.impl.AddJobServiceImpl">
-	</bean>
-	 <bean id="pauseJobService" class="com.i2f.i2shopping.scheduling.service.impl.PauseJobServiceImpl">
-	</bean>
-	 <bean id="resumeJobService" class="com.i2f.i2shopping.scheduling.service.impl.ResumeJobServiceImpl">
-	</bean>-->
-    <!-- 以上Job Service分别用来增加Job，暂停Job，重启Job -->
-    
-	<!-- Job Detail Manager用来定期扫描SCHEDULE_TASK表，从该表中获取尚未调度的任务 -->
-	<!--<bean id="jobDetailManagerTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
-		<property name="cronExpression" value="15 * * * * ?" />
-		<property name="jobDetail" ref="jobDetailManagerJobDetail"></property>
-	</bean>
-	<bean id="jobDetailManagerJobDetail" class="com.i2f.i2shopping.scheduling.BeanInvokingJobDetailFactoryBean">
-			<property name="concurrent" value="false" />
-			<property name="targetBean" value="jobDetailManager" />
-			<property name="targetMethod" value="manageJobDetail" />
-	</bean>
-	<bean id="jobDetailManager" class="com.i2f.i2shopping.scheduling.service.impl.JobDetailManager" />-->
-	<!-- Job Detail Manager用来定期扫描B2C_TASK表，从该表中获取尚未调度的任务 -->
-
-	<!--<bean id="orderScanServiceJobDetail" class="com.i2f.i2shopping.scheduling.BeanInvokingJobDetailFactoryBean">
-			<property name="concurrent" value="false" />
-			<property name="targetBean" value="orderScanService" />
-			<property name="targetMethod" value="scanOrder" />
-	</bean>-->
 </beans>
