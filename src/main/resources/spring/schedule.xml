@@ -15,7 +15,6 @@
         </property>
         <property name="triggers">
         	<list>
-        		<!--<ref local="jobDetailManagerTrigger"/>-->
 				<ref local="scheduleManagerTrigger" />
         	</list>
         </property>
@@ -28,6 +27,7 @@
 		<property name="concurrent" value="false" />
 		<property name="targetBean" value="scheduleManagerTask" />
 		<property name="targetMethod" value="execute" />
+		<property name="durable" value="true" />
 	</bean>
 	<bean id="scheduleManagerTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 		<property name="cronExpression" value="0 * * * * ?" />
